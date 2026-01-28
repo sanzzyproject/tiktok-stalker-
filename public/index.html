@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TikTok Stalker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>TT Stalker 🕵️‍♂️</h1>
+            <p>Lihat profil TikTok tanpa ketahuan</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="usernameInput" placeholder="Username (tanpa @)" autocomplete="off">
+            <button id="searchBtn" onclick="stalkUser()">Cari</button>
+        </div>
+
+        <div id="loading" class="hidden">
+            <div class="spinner"></div>
+            <p>Sedang membypass keamanan...</p>
+        </div>
+
+        <div id="errorMsg" class="hidden"></div>
+
+        <div id="resultArea" class="hidden">
+            <div class="profile-card">
+                <img id="avatar" src="" alt="Avatar">
+                <div class="profile-info">
+                    <h2 id="nickname">Nickname</h2>
+                    <p id="uniqueId">@username</p>
+                    <div class="stats">
+                        <span id="followers">0 Pengikut</span> • 
+                        <span id="likes">0 Suka</span>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="bio" id="bio"></p>
+
+            <h3>Video Terbaru</h3>
+            <div class="grid-posts" id="postsGrid">
+                </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
