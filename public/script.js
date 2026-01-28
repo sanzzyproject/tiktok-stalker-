@@ -124,16 +124,40 @@ async function fetchTikTokData(username) {
         showElement(loading);
         
         const response = await fetch(`${API_URL}?username=${encodeURIComponent(username)}`);
-        const data = await response.json();
+        
+        // Check if response is ok
+        if (!response.ok) {
+            let errorMessage = 'Gagal mengambil data';
+            
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.message || errorMessage;
+            } catch (e) {
+                // If JSON parsing fails, use status text
+                errorMessage = `Error ${response.status}: ${response.statusText}`;
+            }
+            
+            throw new Error(errorMessage);
+        }
+        
+        // Get response text first
+        const responseText = await response.text();
+        
+        // Try to parse as JSON
+        let data;
+        try {
+            data = JSON.parse(responseText);
+        } catch (parseError) {
+            console.error('JSON Parse Error:', parseError);
+            console.error('Response text:', responseText.substring(0, 200));
+            throw new Error('Server mengembalikan response yang tidak valid. Silakan coba lagi.');
+        }
         
         hideElement(loading);
         
-        if (!response.ok) {
-            throw new Error(data.message || 'Gagal mengambil data');
-        }
-        
+        // Validate data structure
         if (!data.profile || !data.profile.userInfo) {
-            throw new Error('Username tidak ditemukan');
+            throw new Error('Username tidak ditemukan atau data tidak lengkap');
         }
         
         displayProfile(data);
