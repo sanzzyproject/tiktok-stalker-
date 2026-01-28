@@ -2,51 +2,91 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TikTok Stalker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TikTok Profile Viewer - Lihat profil dan video TikTok">
+    <title>TikTok Stalker - Profile Viewer</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div class="container">
-        <header>
-            <h1>TT Stalker 🕵️‍♂️</h1>
-            <p>Lihat profil TikTok tanpa ketahuan</p>
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                </svg>
+                <h1>TikTok Stalker</h1>
+            </div>
         </header>
 
-        <div class="search-box">
-            <input type="text" id="usernameInput" placeholder="Username (tanpa @)" autocomplete="off">
-            <button id="searchBtn" onclick="stalkUser()">Cari</button>
+        <!-- Search Section -->
+        <div class="search-section">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="username" 
+                    placeholder="Masukkan username TikTok..." 
+                    autocomplete="off"
+                >
+                <button id="searchBtn" class="btn-search">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </button>
+            </div>
         </div>
 
-        <div id="loading" class="hidden">
+        <!-- Loading -->
+        <div id="loading" class="loading hidden">
             <div class="spinner"></div>
-            <p>Sedang membypass keamanan...</p>
+            <p>Memuat data...</p>
         </div>
 
-        <div id="errorMsg" class="hidden"></div>
+        <!-- Error Message -->
+        <div id="error" class="error hidden"></div>
 
-        <div id="resultArea" class="hidden">
-            <div class="profile-card">
-                <img id="avatar" src="" alt="Avatar">
+        <!-- Profile Section -->
+        <div id="profile" class="profile hidden">
+            <div class="profile-header">
+                <img id="avatar" src="" alt="Avatar" class="avatar">
                 <div class="profile-info">
-                    <h2 id="nickname">Nickname</h2>
-                    <p id="uniqueId">@username</p>
-                    <div class="stats">
-                        <span id="followers">0 Pengikut</span> • 
-                        <span id="likes">0 Suka</span>
-                    </div>
+                    <h2 id="nickname"></h2>
+                    <p id="uniqueId" class="username"></p>
+                    <p id="signature" class="bio"></p>
                 </div>
             </div>
             
-            <p class="bio" id="bio"></p>
-
-            <h3>Video Terbaru</h3>
-            <div class="grid-posts" id="postsGrid">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="following">0</div>
+                    <div class="stat-label">Following</div>
                 </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="followers">0</div>
+                    <div class="stat-label">Followers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="likes">0</div>
+                    <div class="stat-label">Likes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="videos">0</div>
+                    <div class="stat-label">Videos</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts Section -->
+        <div id="posts" class="posts hidden">
+            <h3 class="section-title">Video Terbaru</h3>
+            <div id="postsGrid" class="posts-grid"></div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Made with ❤️ | TikTok Stalker</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
